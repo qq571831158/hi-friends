@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ch.mapping.UserinfoMapper">
+    <!--<resultMap type="org.apache.ibatis.submitted.rounding.User" id="usermap">-->
+        <!--<id column="id" property="id"/>-->
+        <!--<result column="name" property="name"/>-->
+        <!--<result column="funkyNumber" property="funkyNumber"/>-->
+        <!--<result column="roundingMode" property="roundingMode"/>-->
+    <!--</resultMap>-->
+
+    <select id="selectOne" parameterType="java.lang.String" resultType="com.hifriends.model.Userinfo">
+        SELECT * FROM userinfo WHERE username = #{username}
+    </select>
+    <insert id="insert">
+        insert into userinfo (id, useranme, password, nickname,userPicture,registTime,lasgLogin,isActive) values (
+        #{id}, #{useranme}, #{password}, #{nickname},#{userPicture},#{registTime},#{lasgLogin},#{isActive}
+        )
+    </insert>
+    <update id="updateOne" parameterType="com.hifriends.model.Userinfo">
+        UPDATE userinfo SET
+        id = #{id},
+        useranme = #{useranme},
+        password = #{password},
+        nickname = #{nickname},
+        userPicture = #{userPicture},
+        registTime = #{registTime},
+        lasgLogin = #{lasgLogin},
+        isActive = #{isActive}
+        WHERE username = #{username}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+        DELETE FROM userinfo WHERE username = #{username}
+    </delete>
+</mapper>
