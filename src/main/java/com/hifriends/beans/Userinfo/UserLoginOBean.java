@@ -6,6 +6,7 @@ package com.hifriends.beans.Userinfo;
 public class UserLoginOBean {
     private String nickname;
     private String userPicture;
+    private String sessionID;
 
     public String getNickname() {
         return nickname;
@@ -22,12 +23,22 @@ public class UserLoginOBean {
     public void setUserPicture(String userPicture) {
         this.userPicture = userPicture;
     }
+
+    public String getSessionID() {
+        return sessionID;
+    }
+
+    public void setSessionID(String sessionID) {
+        this.sessionID = sessionID;
+    }
+
     public UserLoginOBean(){
 
     }
 
-    public UserLoginOBean(String nickname, String userPicture) {
+    public UserLoginOBean(String nickname, String userPicture,String sessionID) {
         this.nickname = nickname;
         this.userPicture = userPicture;
+        this.sessionID = sessionID;
     }
 }

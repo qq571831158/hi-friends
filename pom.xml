@@ -132,26 +132,20 @@
       <version>4.2.0.RELEASE</version>
     </dependency>
 
-    <!--&lt;!&ndash;jjwt&ndash;&gt;-->
-    <!--<dependency>-->
-      <!--<groupId>io.jsonwebtoken</groupId>-->
-      <!--<artifactId>jjwt</artifactId>-->
-      <!--<version>0.7.0</version>-->
-    <!--</dependency>-->
-
-    <!--<dependency>-->
-      <!--<groupId>redis.clients</groupId>-->
-      <!--<artifactId>jedis</artifactId>-->
-      <!--<version>2.1.0</version>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-      <!--<groupId>org.springframework.data</groupId>-->
-      <!--<artifactId>spring-data-redis</artifactId>-->
-      <!--<version>1.0.2.RELEASE</version>-->
-    <!--</dependency>-->
+    <dependency>
+      <groupId>com.sun.mail</groupId>
+      <artifactId>javax.mail</artifactId>
+      <version>1.5.2</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-email</groupId>
+      <artifactId>commons-email</artifactId>
+      <version>1.1</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>hi-friends</finalName>
+
     <!--java目录下xml文件默认不会打包,此处手动打包,否则报错-->
     <resources>
       <resource>

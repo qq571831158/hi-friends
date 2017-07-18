@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hifriends.dao.TopicMapper" >
+  <resultMap id="BaseResultMap" type="com.hifriends.model.Topic" >
+    <constructor >
+      <idArg column="topic_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="topic_user" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="topic_zan" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="topic_mark" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="topic_remark" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="topic_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="topic_userpicture" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hifriends.model.TopicWithBLOBs" >
+    <constructor >
+      <idArg column="topic_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="topic_user" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="topic_zan" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="topic_mark" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="topic_remark" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="topic_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="topic_userpicture" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="topic_title" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="topic_content" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="topic_pictures" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    topic_id, topic_user, topic_zan, topic_mark, topic_remark, topic_time, topic_userpicture
+  </sql>
+  <sql id="Blob_Column_List" >
+    topic_title, topic_content, topic_pictures
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from topic
+    where topic_id = #{topicId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from topic
+    where topic_id = #{topicId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hifriends.model.TopicWithBLOBs" >
+    insert into topic (topic_id, topic_user, topic_zan, 
+      topic_mark, topic_remark, topic_time, 
+      topic_userpicture, topic_title, topic_content, 
+      topic_pictures)
+    values (#{topicId,jdbcType=INTEGER}, #{topicUser,jdbcType=VARCHAR}, #{topicZan,jdbcType=INTEGER}, 
+      #{topicMark,jdbcType=INTEGER}, #{topicRemark,jdbcType=INTEGER}, #{topicTime,jdbcType=TIMESTAMP}, 
+      #{topicUserpicture,jdbcType=VARCHAR}, #{topicTitle,jdbcType=LONGVARCHAR}, #{topicContent,jdbcType=LONGVARCHAR}, 
+      #{topicPictures,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hifriends.model.TopicWithBLOBs" >
+    insert into topic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="topicId != null" >
+        topic_id,
+      </if>
+      <if test="topicUser != null" >
+        topic_user,
+      </if>
+      <if test="topicZan != null" >
+        topic_zan,
+      </if>
+      <if test="topicMark != null" >
+        topic_mark,
+      </if>
+      <if test="topicRemark != null" >
+        topic_remark,
+      </if>
+      <if test="topicTime != null" >
+        topic_time,
+      </if>
+      <if test="topicUserpicture != null" >
+        topic_userpicture,
+      </if>
+      <if test="topicTitle != null" >
+        topic_title,
+      </if>
+      <if test="topicContent != null" >
+        topic_content,
+      </if>
+      <if test="topicPictures != null" >
+        topic_pictures,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="topicId != null" >
+        #{topicId,jdbcType=INTEGER},
+      </if>
+      <if test="topicUser != null" >
+        #{topicUser,jdbcType=VARCHAR},
+      </if>
+      <if test="topicZan != null" >
+        #{topicZan,jdbcType=INTEGER},
+      </if>
+      <if test="topicMark != null" >
+        #{topicMark,jdbcType=INTEGER},
+      </if>
+      <if test="topicRemark != null" >
+        #{topicRemark,jdbcType=INTEGER},
+      </if>
+      <if test="topicTime != null" >
+        #{topicTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="topicUserpicture != null" >
+        #{topicUserpicture,jdbcType=VARCHAR},
+      </if>
+      <if test="topicTitle != null" >
+        #{topicTitle,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="topicContent != null" >
+        #{topicContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="topicPictures != null" >
+        #{topicPictures,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hifriends.model.TopicWithBLOBs" >
+    update topic
+    <set >
+      <if test="topicUser != null" >
+        topic_user = #{topicUser,jdbcType=VARCHAR},
+      </if>
+      <if test="topicZan != null" >
+        topic_zan = #{topicZan,jdbcType=INTEGER},
+      </if>
+      <if test="topicMark != null" >
+        topic_mark = #{topicMark,jdbcType=INTEGER},
+      </if>
+      <if test="topicRemark != null" >
+        topic_remark = #{topicRemark,jdbcType=INTEGER},
+      </if>
+      <if test="topicTime != null" >
+        topic_time = #{topicTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="topicUserpicture != null" >
+        topic_userpicture = #{topicUserpicture,jdbcType=VARCHAR},
+      </if>
+      <if test="topicTitle != null" >
+        topic_title = #{topicTitle,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="topicContent != null" >
+        topic_content = #{topicContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="topicPictures != null" >
+        topic_pictures = #{topicPictures,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where topic_id = #{topicId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hifriends.model.TopicWithBLOBs" >
+    update topic
+    set topic_user = #{topicUser,jdbcType=VARCHAR},
+      topic_zan = #{topicZan,jdbcType=INTEGER},
+      topic_mark = #{topicMark,jdbcType=INTEGER},
+      topic_remark = #{topicRemark,jdbcType=INTEGER},
+      topic_time = #{topicTime,jdbcType=TIMESTAMP},
+      topic_userpicture = #{topicUserpicture,jdbcType=VARCHAR},
+      topic_title = #{topicTitle,jdbcType=LONGVARCHAR},
+      topic_content = #{topicContent,jdbcType=LONGVARCHAR},
+      topic_pictures = #{topicPictures,jdbcType=LONGVARCHAR}
+    where topic_id = #{topicId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hifriends.model.Topic" >
+    update topic
+    set topic_user = #{topicUser,jdbcType=VARCHAR},
+      topic_zan = #{topicZan,jdbcType=INTEGER},
+      topic_mark = #{topicMark,jdbcType=INTEGER},
+      topic_remark = #{topicRemark,jdbcType=INTEGER},
+      topic_time = #{topicTime,jdbcType=TIMESTAMP},
+      topic_userpicture = #{topicUserpicture,jdbcType=VARCHAR}
+    where topic_id = #{topicId,jdbcType=INTEGER}
+  </update>
+</mapper>

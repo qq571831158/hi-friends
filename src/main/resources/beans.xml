@@ -29,13 +29,13 @@
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
-        <!--<property name="testWhileIdle" value="true"/>-->
-        <!--<property name="testOnBorrow" value="true"/>-->
-        <!--<property name="testOnReturn" value="false"/>-->
-        <!--<property name="timeBetweenEvictionRunsMillis" value="30000"/>-->
-        <!--<property name="maxActive" value="30"/>-->
-        <!--<property name="minIdle" value="5"/>-->
-        <!--<property name="initialSize" value="5"/>-->
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="true"/>
+        <property name="testOnReturn" value="false"/>
+        <property name="timeBetweenEvictionRunsMillis" value="30000"/>
+        <property name="maxActive" value="30"/>
+        <property name="minIdle" value="5"/>
+        <property name="initialSize" value="5"/>
     </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -48,7 +48,7 @@
 
     <!--扫描指定的DAO层Mapper,作为接口实现-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.ch"/>
+        <property name="basePackage" value="com.hifriends.mapping"/>
         <property name="annotationClass"  value="org.springframework.stereotype.Repository"/>
     </bean>
 </beans>

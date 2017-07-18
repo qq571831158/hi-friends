@@ -1,36 +1,59 @@
 package com.hifriends.model;
 
-/**
- * Created by apple on 2017/7/16.
- */
-
-import java.sql.Timestamp;
-
+import java.util.Date;
 
 public class Userinfo {
-    private int id;
-    private String useranme;
-    private String password;
-    private String nickname;
-    private String userPicture;
-    private Timestamp registTime;
-    private Timestamp lasgLogin;
-    private int isActive;
+    private String username;
 
-    public int getId() {
+    private Integer id;
+
+    private String password;
+
+    private String nickname;
+
+    private String userPicture;
+
+    private Date registTime;
+
+    private Date lastLogin;
+
+    private Integer isActive;
+
+    private String eMail;
+
+    public Userinfo(String username, Integer id, String password, String nickname, String userPicture, Date registTime, Date lastLogin, Integer isActive, String eMail) {
+        this.username = username;
+        this.id = id;
+        this.password = password;
+        this.nickname = nickname;
+        this.userPicture = userPicture;
+        this.registTime = registTime;
+        this.lastLogin = lastLogin;
+        this.isActive = isActive;
+        this.eMail = eMail;
+    }
+    public Userinfo(Date lastLogin,String username){
+        this.lastLogin = lastLogin;
+        this.username = username;
+    }
+    public Userinfo() {
+        super();
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getUseranme() {
-        return useranme;
-    }
-
-    public void setUseranme(String useranme) {
-        this.useranme = useranme;
     }
 
     public String getPassword() {
@@ -38,7 +61,7 @@ public class Userinfo {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = password == null ? null : password.trim();
     }
 
     public String getNickname() {
@@ -46,7 +69,7 @@ public class Userinfo {
     }
 
     public void setNickname(String nickname) {
-        this.nickname = nickname;
+        this.nickname = nickname == null ? null : nickname.trim();
     }
 
     public String getUserPicture() {
@@ -54,43 +77,43 @@ public class Userinfo {
     }
 
     public void setUserPicture(String userPicture) {
-        this.userPicture = userPicture;
+        this.userPicture = userPicture == null ? null : userPicture.trim();
     }
 
-    public Timestamp getRegistTime() {
+    public Date getRegistTime() {
         return registTime;
     }
 
-    public void setRegistTime(Timestamp registTime) {
+    public void setRegistTime(Date registTime) {
         this.registTime = registTime;
     }
 
-    public Timestamp getLasgLogin() {
-        return lasgLogin;
+    public Date getLastLogin() {
+        return lastLogin;
     }
 
-    public void setLasgLogin(Timestamp lasgLogin) {
-        this.lasgLogin = lasgLogin;
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
     }
 
-    public int getIsActive() {
+    public Integer getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(int isActive) {
+    public void setIsActive(Integer isActive) {
         this.isActive = isActive;
     }
 
-    public Userinfo(){}
+    public String geteMail() {
+        return eMail;
+    }
 
-    public Userinfo(int id, String useranme, String password, String nickname, String userPicture, Timestamp registTime, Timestamp lasgLogin, int isActive) {
-        this.id = id;
-        this.useranme = useranme;
-        this.password = password;
-        this.nickname = nickname;
-        this.userPicture = userPicture;
-        this.registTime = registTime;
-        this.lasgLogin = lasgLogin;
-        this.isActive = isActive;
+    public void seteMail(String eMail) {
+        this.eMail = eMail;
+    }
+
+    @Override
+    public String toString() {
+        return this.getUserPicture() + this.getUsername() + this.getNickname()+this.geteMail();
     }
 }

@@ -13,12 +13,12 @@
     <context:component-scan base-package="com.hifriends.controller"/>
 
 
-    <!--&lt;!&ndash;视图解析器&ndash;&gt;-->
-    <!--<bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
-        <!--&lt;!&ndash;<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>&ndash;&gt;-->
-        <!--<property name="prefix" value="/WEB-INF/"/>-->
-        <!--<property name="suffix" value=".jsp"/>-->
-    <!--</bean>-->
+    <!--视图解析器-->
+    <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
+        <property name="prefix" value="/WEB-INF/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
 
 
     <mvc:resources mapping="/resource/**" location="/resource/"/>

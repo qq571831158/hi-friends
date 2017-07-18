@@ -1,35 +1,152 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ch.mapping.UserinfoMapper">
-    <!--<resultMap type="org.apache.ibatis.submitted.rounding.User" id="usermap">-->
-        <!--<id column="id" property="id"/>-->
-        <!--<result column="name" property="name"/>-->
-        <!--<result column="funkyNumber" property="funkyNumber"/>-->
-        <!--<result column="roundingMode" property="roundingMode"/>-->
-    <!--</resultMap>-->
+<mapper namespace="com.hifriends.dao.UserinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.hifriends.model.Userinfo" >
+    <constructor >
+      <idArg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="password" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="nickname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_picture" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="regist_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="last_login" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="is_active" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="e_mail" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    username, id, password, nickname, user_picture, regist_time, last_login, is_active,e_mail
+  </sql>
 
-    <select id="selectOne" parameterType="java.lang.String" resultType="com.hifriends.model.Userinfo">
-        SELECT * FROM userinfo WHERE username = #{username}
-    </select>
-    <insert id="insert">
-        insert into userinfo (id, useranme, password, nickname,userPicture,registTime,lasgLogin,isActive) values (
-        #{id}, #{useranme}, #{password}, #{nickname},#{userPicture},#{registTime},#{lasgLogin},#{isActive}
-        )
-    </insert>
-    <update id="updateOne" parameterType="com.hifriends.model.Userinfo">
-        UPDATE userinfo SET
-        id = #{id},
-        useranme = #{useranme},
-        password = #{password},
-        nickname = #{nickname},
-        userPicture = #{userPicture},
-        registTime = #{registTime},
-        lasgLogin = #{lasgLogin},
-        isActive = #{isActive}
-        WHERE username = #{username}
-    </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from userinfo
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from userinfo
+    where username = #{username,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hifriends.model.Userinfo" >
+    insert into userinfo (username, id, password, 
+      nickname, user_picture, regist_time, 
+      last_login, is_active, e_mail
+      )
+    values (#{username,jdbcType=VARCHAR}, #{id,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, 
+      #{nickname,jdbcType=VARCHAR}, #{userPicture,jdbcType=VARCHAR}, #{registTime,jdbcType=TIMESTAMP}, 
+      #{lastLogin,jdbcType=TIMESTAMP}, #{isActive,jdbcType=INTEGER}, #{eMail,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hifriends.model.Userinfo" >
+    insert into userinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="userPicture != null" >
+        user_picture,
+      </if>
+      <if test="registTime != null" >
+        regist_time,
+      </if>
+      <if test="lastLogin != null" >
+        last_login,
+      </if>
+      <if test="isActive != null" >
+        is_active,
+      </if>
+      <if test="eMail != null" >
+        e_mail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="userPicture != null" >
+        #{userPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="registTime != null" >
+        #{registTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLogin != null" >
+        #{lastLogin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isActive != null" >
+        #{isActive,jdbcType=INTEGER},
+      </if>
+      <if test="eMail != null" >
+        #{eMail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hifriends.model.Userinfo" >
+    update userinfo
+    <set >
+      <if test="id != null" >
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="userPicture != null" >
+        user_picture = #{userPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="registTime != null" >
+        regist_time = #{registTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLogin != null" >
+        last_login = #{lastLogin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isActive != null" >
+        is_active = #{isActive,jdbcType=INTEGER},
+      </if>
+      <if test="eMail != null" >
+        e_mail = #{eMail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where username = #{username,jdbcType=VARCHAR}
+  </update>
+  <update id="updateLastLogin" parameterType="com.hifriends.model.Userinfo">
+    update userinfo set last_login = #{lastLogin,jdbcType = TIMESTAMP}
+    WHERE username = #{username,jdbcType=VARCHAR};
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hifriends.model.Userinfo" >
+    update userinfo
+    set id = #{id,jdbcType=INTEGER},
+      password = #{password,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      user_picture = #{userPicture,jdbcType=VARCHAR},
+      regist_time = #{registTime,jdbcType=TIMESTAMP},
+      last_login = #{lastLogin,jdbcType=TIMESTAMP},
+      is_active = #{isActive,jdbcType=INTEGER},
+      e_mail = #{eMail,jdbcType=VARCHAR}
+    where username = #{username,jdbcType=VARCHAR}
+  </update>
 
-    <delete id="delete" parameterType="java.lang.String">
-        DELETE FROM userinfo WHERE username = #{username}
-    </delete>
+  <update id="updateActiveStatusByUsername" parameterType="java.lang.String">
+    UPDATE userinfo SET is_active = 1 WHERE username = #{username,jdbcType=VARCHAR}
+  </update>
 </mapper>

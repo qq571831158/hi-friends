@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hifriends.dao.EmailCodeMapper" >
+  <resultMap id="BaseResultMap" type="com.hifriends.model.EmailCode" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="is_Exipired" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="is_Timeline" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, username, email, code, is_Exipired, is_Timeline, create_Time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from emailcode
+    where id = #{id,jdbcType=INTEGER} AND is_Expired = 0 AND is_Timeline = 0
+  </select>
+  <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from emailcode
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from emailcode
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hifriends.model.EmailCode" >
+    insert into emailcode (id, username, email, 
+      code, is_Exipired, is_Timeline, 
+      create_Time)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{isExipired,jdbcType=INTEGER}, #{isTimeline,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hifriends.model.EmailCode" >
+    insert into emailcode
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="isExipired != null" >
+        is_Exipired,
+      </if>
+      <if test="isTimeline != null" >
+        is_Timeline,
+      </if>
+      <if test="createTime != null" >
+        create_Time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="isExipired != null" >
+        #{isExipired,jdbcType=INTEGER},
+      </if>
+      <if test="isTimeline != null" >
+        #{isTimeline,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hifriends.model.EmailCode" >
+    update emailcode
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="isExipired != null" >
+        is_Exipired = #{isExipired,jdbcType=INTEGER},
+      </if>
+      <if test="isTimeline != null" >
+        is_Timeline = #{isTimeline,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_Time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hifriends.model.EmailCode" >
+    update emailcode
+    set username = #{username,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      is_Exipired = #{isExipired,jdbcType=INTEGER},
+      is_Timeline = #{isTimeline,jdbcType=INTEGER},
+      create_Time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
